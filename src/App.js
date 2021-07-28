@@ -5,27 +5,30 @@ import blogService from './services/blogs'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [user, setUser] = useState(null)
-  // eslint-disable-next-line no-unused-vars
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
+  const logout = () => {
+    window.localStorage.setItem('user', null)
+    setUser(null)
+  }
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
     )  
   }, [])
-  
+
   if (user===null || user===undefined){
     return(
       <Login 
         user={user} 
         setUser={setUser} 
-        setErrorMessage={setErrorMessage}   
     />)
   }
   return (
     <div>
       <h2>blogs</h2>
+      <h4>{user.name} is logged in. <button onClick={logout}>logout</button></h4>
       {blogs.map(blog =>
         <Blog key={blog.title} blog={blog} />
       )}

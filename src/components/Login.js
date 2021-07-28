@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import loginService from '../services/login' 
 
-
 const Login = (props) => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
-
+  // eslint-disable-next-line no-unused-vars
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -16,17 +16,17 @@ const Login = (props) => {
         username, password,
       })
       console.log('user =', user)
-      props.setUser(user)
       setUsername('')
       setPassword('')
+      window.localStorage.setItem('user', JSON.stringify(user))
+      return (props.setUser(user))
     } catch (exception) {
-      props.setErrorMessage('Wrong credentials')
+      setErrorMessage('Wrong credentials')
       setTimeout(() => {
-        props.setErrorMessage(null)
+        setErrorMessage(null)
       }, 5000)
     }
   }
-
 
   return(
     <div>
