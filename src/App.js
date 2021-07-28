@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem('user'))
     setUser(loggedUser)
-    blogService.setToken(loggedUser.token)
+    try {blogService.setToken(loggedUser.token)}catch{}
   }, [])
 
   useEffect(() => {

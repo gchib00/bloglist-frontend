@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import loginService from '../services/login' 
+import Notification from './Notification'
 
 const Login = (props) => {
   const [username, setUsername] = useState('') 
@@ -24,7 +25,16 @@ const Login = (props) => {
       setErrorMessage('Wrong credentials')
       return setTimeout(() => { 
         setErrorMessage(null)
-      }, 5000)
+      }, 3000)
+    }
+  }
+  const giveText = () => {
+    if(errorMessage === 'Wrong credentials') {
+      let text = errorMessage
+      setTimeout(() => { 
+        setErrorMessage(null)
+      }, 3000)
+      return text
     }
   }
 
@@ -51,6 +61,7 @@ const Login = (props) => {
         </div>
         <button type="submit">login</button>
       </form>
+      <Notification text={giveText()} />
     </div>  
   )
 }

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import blogService from '../services/blogs' 
+import Notification from './Notification'
 
 const AddBlogForm = (props) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [showNotification, setShowNotification] = useState(false)
+  const [notificationText, setNotificationText] = useState('')
 
   const addBlog = (event) => {
     const reRenderBlogs = () => {
@@ -13,19 +16,38 @@ const AddBlogForm = (props) => {
       )
     }
     event.preventDefault()
-    try{
-      blogService.addBlog({title, author, url})
-        .then(reRenderBlogs())
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-    } catch (error) {
-      console.log(error)
+    blogService.addBlog({title, author, url})
+      .then(response => setNotificationText(`'${response.title}' has been added successfully`))
+      .then(reRenderBlogs())
+      .catch(error => {
+        if(error.toString().includes('401')) {
+          setNotificationText('Title is invalid')
+          setShowNotification(true)
+        }
+      })
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+    setShowNotification(true)
+    
+  }
+
+  const giveText = () => {
+    let text = ''
+    if (showNotification){
+      text = notificationText
+      setTimeout(()=> {
+        setShowNotification(false)
+        setNotificationText('')
+      }, 3000)
+      return text
+    } else {
+      return ''
     }
-
-  } 
-
+  }
   return(
+    <>
+    <Notification text={giveText()}/>
     <form onSubmit={addBlog}>
       <div>
       title:
@@ -56,6 +78,7 @@ const AddBlogForm = (props) => {
       </div>
       <button type="submit">create</button>
     </form>
+    </>
   )
 }
 
