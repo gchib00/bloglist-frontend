@@ -22,7 +22,7 @@ const Login = (props) => {
       return (props.setUser(user))
     } catch (exception) {
       setErrorMessage('Wrong credentials')
-      setTimeout(() => {
+      return setTimeout(() => { 
         setErrorMessage(null)
       }, 5000)
     }
