@@ -3,6 +3,8 @@ import AddBlogForm from './components/AddBlogForm'
 import Blog from './components/Blog'
 import Login from './components/Login'
 import blogService from './services/blogs'
+import Togglable from './components/Togglable'
+
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -35,7 +37,9 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <h4>{user.name} is logged in. <button onClick={logout}>logout</button></h4>
-      <AddBlogForm user={user} setBlogs={setBlogs}/>
+      <Togglable btnLabel='Add Blog' blogs={blogs}>
+        <AddBlogForm user={user} setBlogs={setBlogs}/>
+      </Togglable>
       <br />
       {blogs.map(blog =>
         <Blog key={blog.title} blog={blog} />
