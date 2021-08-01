@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Notification = (props) => {
 
   const style_positive = {

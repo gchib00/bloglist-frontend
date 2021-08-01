@@ -1,4 +1,4 @@
-import React from 'react'
+// eslint-disable-next-line no-unused-vars
 import Togglable from './Togglable'
 import blogServices from '../services/blogs'
 
@@ -11,16 +11,16 @@ const blogStyle = {
 }
 const incrementLikes = (blog, setBlogs) => {
   blogServices.updateBlog(blog)
-  .then(blogServices.getAll().then(blogs => {
-    setBlogs(blogs)
-  }))
+    .then(blogServices.getAll().then(blogs => {
+      setBlogs(blogs)
+    }))
 }
 const deleteBlog = (blog, setBlogs) => {
   if(window.confirm(`Are you sure you want to delete ${blog.title} from the list?`)){
     blogServices.deleteBlog(blog)
-    .then(blogServices.getAll().then(blogs => {
-      setBlogs(blogs)
-    }))
+      .then(blogServices.getAll().then(blogs => {
+        setBlogs(blogs)
+      }))
   }
 }
 

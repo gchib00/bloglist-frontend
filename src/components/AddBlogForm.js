@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import blogService from '../services/blogs' 
+// eslint-disable-next-line no-unused-vars
 import Notification from './Notification'
 
 const AddBlogForm = (props) => {
@@ -47,37 +48,37 @@ const AddBlogForm = (props) => {
   }
   return(
     <>
-    <Notification text={giveText()}/>
-    <form onSubmit={addBlog}>
-      <div>
-      title:
-        <input
-        type="text"
-        value={title}
-        name="title"
-        onChange={({ target }) => setTitle(target.value)}
-      />
-      </div>
-      <div>
+      <Notification text={giveText()}/>
+      <form onSubmit={addBlog}>
+        <div>
+        title:
+          <input
+            type="text"
+            value={title}
+            name="title"
+            onChange={({ target }) => setTitle(target.value)}
+          />
+        </div>
+        <div>
         author:
           <input
-          type="text"
-          value={author}
-          name="author"
-          onChange={({ target }) => setAuthor(target.value)}
-        />
-      </div>
-      <div>
+            type="text"
+            value={author}
+            name="author"
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+        </div>
+        <div>
         url:
           <input
-          type="text"
-          value={url}
-          name="url"
-          onChange={({ target }) => setUrl(target.value)}
-        />
-      </div>
-      <button type="submit">create</button>
-    </form>
+            type="text"
+            value={url}
+            name="url"
+            onChange={({ target }) => setUrl(target.value)}
+          />
+        </div>
+        <button type="submit">create</button>
+      </form>
     </>
   )
 }

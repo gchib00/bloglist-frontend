@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
-const Togglable = (props) => {
+const Togglable = (props) => {  
   const [visible, setVisible] = useState(false)
+
+  Togglable.propTypes = {
+    btnLabel: PropTypes.string.isRequired
+  }
 
   const hideWhenVisible = {display: visible ? 'none' : ''}
   const showWhenVisible = {display: visible ? '' : 'none'}

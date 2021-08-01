@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import loginService from '../services/login' 
+// eslint-disable-next-line no-unused-vars
 import Notification from './Notification'
 
 const Login = (props) => {
@@ -10,8 +11,6 @@ const Login = (props) => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log('logging in with', username, password)
-
     try {
       const user = await loginService.login({
         username, password,
@@ -19,14 +18,16 @@ const Login = (props) => {
       setUsername('')
       setPassword('')
       window.localStorage.setItem('user', JSON.stringify(user))
-      return (props.setUser(user))
+      props.setUser(user)
     } catch (exception) {
       setErrorMessage('Wrong credentials')
-      return setTimeout(() => { 
-        setErrorMessage(null)
-      }, 3000)
     }
   }
+  useEffect(() => { //functions as componentWillUnmount. It's necessary to avoid memory leak issue caused by setTimeout when component is unmounted
+    return () => {
+      setErrorMessage(null)
+    }
+  }, [])
   const giveText = () => {
     if(errorMessage === 'Wrong credentials') {
       let text = errorMessage
@@ -39,10 +40,10 @@ const Login = (props) => {
 
   return(
     <div>
-     <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin}>
         <div>
           username
-            <input
+          <input
             type="text"
             value={username}
             name="Username"
@@ -51,7 +52,7 @@ const Login = (props) => {
         </div>
         <div>
           password
-            <input
+          <input
             type="password"
             value={password}
             name="Password"

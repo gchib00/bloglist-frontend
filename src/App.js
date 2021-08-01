@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react'
 import AddBlogForm from './components/AddBlogForm'
 import Blog from './components/Blog'
 import Login from './components/Login'
@@ -17,7 +18,8 @@ const App = () => {
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem('user'))
     setUser(loggedUser)
-    try {blogService.setToken(loggedUser.token)}catch{}
+    try {blogService.setToken(loggedUser.token)}
+    catch{error=>console.error(error)}
   }, [])
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const App = () => {
       <Login 
         user={user} 
         setUser={setUser} 
-    />)
+      />)
   }
   return (
     <div>
