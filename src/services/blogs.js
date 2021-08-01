@@ -19,9 +19,17 @@ const updateBlog = async body => {
   return request
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const deleteBlog = async body => {
+  await axios.delete(baseUrl+`/${body._id}`)
+}
+
+const getAll = async () => {
+  const request = await axios.get(baseUrl) 
+  const array = request.data
+  array.sort((a,b) => {
+    return a.likes - b.likes
+  })
+  return array
 }
 const addBlog = async body => {
   const config = {
@@ -37,4 +45,4 @@ const addBlog = async body => {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, addBlog, setToken, updateBlog }
+export default { getAll, addBlog, setToken, updateBlog, deleteBlog }

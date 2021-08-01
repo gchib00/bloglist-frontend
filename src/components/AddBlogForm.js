@@ -10,15 +10,15 @@ const AddBlogForm = (props) => {
   const [notificationText, setNotificationText] = useState('')
 
   const addBlog = (event) => {
-    const reRenderBlogs = () => {
-      blogService.getAll().then(blogs =>
-        props.setBlogs(blogs)
-      )
-    }
+
     event.preventDefault()
     blogService.addBlog({title, author, url})
       .then(response => setNotificationText(`'${response.title}' has been added successfully`))
-      .then(reRenderBlogs())
+      .then(      
+        blogService.getAll().then(blogs =>
+          props.setBlogs(blogs)
+        )
+      )
       .catch(error => {
         if(error.toString().includes('401')) {
           setNotificationText('Title is invalid')

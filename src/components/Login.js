@@ -16,7 +16,6 @@ const Login = (props) => {
       const user = await loginService.login({
         username, password,
       })
-      console.log('user =', user)
       setUsername('')
       setPassword('')
       window.localStorage.setItem('user', JSON.stringify(user))

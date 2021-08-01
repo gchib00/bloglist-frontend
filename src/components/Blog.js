@@ -11,10 +11,19 @@ const blogStyle = {
 }
 const incrementLikes = (blog, setBlogs) => {
   blogServices.updateBlog(blog)
-  blogServices.getAll().then(blogs => {
+  .then(blogServices.getAll().then(blogs => {
     setBlogs(blogs)
-  })
+  }))
 }
+const deleteBlog = (blog, setBlogs) => {
+  if(window.confirm(`Are you sure you want to delete ${blog.title} from the list?`)){
+    blogServices.deleteBlog(blog)
+    .then(blogServices.getAll().then(blogs => {
+      setBlogs(blogs)
+    }))
+  }
+}
+
 
 const Blog = ({blog, setBlogs}) => (
   <div style={blogStyle}>
@@ -26,6 +35,8 @@ const Blog = ({blog, setBlogs}) => (
           likes: {blog.likes}<button onClick={()=>incrementLikes(blog, setBlogs)}>like</button>
         </div>
         {blog.author}
+        <br/><br/> 
+        <button onClick={()=>deleteBlog(blog, setBlogs)}>delete</button>
       </div>
     </Togglable>
   </div>  
