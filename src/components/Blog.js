@@ -27,7 +27,9 @@ const deleteBlog = (blog, setBlogs) => {
 
 const Blog = ({blog, setBlogs}) => (
   <div style={blogStyle}>
-    {blog.title} {blog.author}
+    <div className='blogTitle'>
+      {blog.title} {blog.author}
+    </div>
     <Togglable btnLabel='view' btnHide='hide'>
       <div>
         {blog.url}
