@@ -16,6 +16,7 @@ test('Blog title doesnt contain the url, but only name and author', () => {
     <Blog blog={fakeBlog} />
   )
   expect(component.container.querySelector('.blogTitle')).not.toHaveTextContent('www.fakeWeb.com')
+  expect(component.container.querySelector('.blogTitle')).not.toHaveTextContent(12)
 })
 
 
