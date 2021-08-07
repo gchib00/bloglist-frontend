@@ -33,12 +33,12 @@ const Blog = ({blog, setBlogs}) => (
     <Togglable btnLabel='view' btnHide='hide'>
       <div>
         {blog.url}
-        <div>
-          likes: {blog.likes}<button onClick={()=>incrementLikes(blog, setBlogs)}>like</button>
+        <div id='likes'>
+          likes: {blog.likes}<button onClick={()=>incrementLikes(blog, setBlogs)} id='likesBtn'>like</button>
         </div>
         {blog.author}
         <br/><br/> 
-        <button onClick={()=>deleteBlog(blog, setBlogs)}>delete</button>
+        <button onClick={()=>deleteBlog(blog, setBlogs)} id='deleteBtn'>delete</button>
       </div>
     </Togglable>
   </div>  
