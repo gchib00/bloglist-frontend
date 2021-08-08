@@ -23,10 +23,13 @@ const deleteBlog = (blog, setBlogs) => {
       }))
   }
 }
-
+const generateUniqueID = (title) => {
+  const id = title.replace(/\s/g, '')
+  return id
+}
 
 const Blog = ({blog, setBlogs}) => (
-  <div style={blogStyle}>
+  <div style={blogStyle} id={generateUniqueID(blog.title)} className='blog'>
     <div className='blogTitle'>
       {blog.title} {blog.author}
     </div>
