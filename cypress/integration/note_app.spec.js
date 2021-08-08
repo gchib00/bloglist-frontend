@@ -22,12 +22,12 @@ describe('Blog app', function() {
       cy.contains('Tim Gasovski')
     })
 
-    // it('fails with wrong credentials', function() {
-    //   cy.get('#username').type('wrongName')
-    //   cy.get('#password').type('1')
-    //   cy.contains('login').click()
-    //   cy.contains('Wrong credentials')
-    // })
+    it('fails with wrong credentials', function() {
+      cy.get('#username').type('wrongName')
+      cy.get('#password').type('1')
+      cy.contains('login').click()
+      cy.contains('Wrong credentials')
+    })
   })
   describe('When logged in', function() {
     beforeEach(function() {
@@ -37,32 +37,32 @@ describe('Blog app', function() {
       cy.contains('Tim Gasovski')
     })
 
-    // it('A blog can be created and liked', function() {
-    //   cy.contains('Add Blog').click()
-    //     .get('#title').type('Title of my TEST blog')
-    //     .get('#author').type('John Green Jr.')
-    //     .get('#url').type('www.webiste.com/myblog')
-    //   cy.contains('create').click()
-    //   cy.contains('Title of my TEST blog John Green Jr.')
-    //   //check if likes function works:
-    //   cy.contains('view').click()
-    //   cy.get('#likes')
-    //     .contains('0')
-    //   cy.get('#likesBtn').click()
-    //   cy.get('#likes')
-    //     .contains('1')
-    // })
-    // it('A blog can be deleted', function() {
-    //   cy.contains('Add Blog').click()
-    //     .get('#title').type('Should be deleted (TITLE)')
-    //     .get('#author').type('John Johnson')
-    //     .get('#url').type('www.webiste.com/myblog')
-    //   cy.contains('create').click()
-    //   cy.contains('view').click()
-    //   cy.contains('Should be deleted (TITLE)')
-    //   cy.get('#deleteBtn').click()
-    //   cy.should('not.contain', 'Title of my TEST blog')
-    // })
+    it('A blog can be created and liked', function() {
+      cy.contains('Add Blog').click()
+        .get('#title').type('Title of my TEST blog')
+        .get('#author').type('John Green Jr.')
+        .get('#url').type('www.webiste.com/myblog')
+      cy.contains('create').click()
+      cy.contains('Title of my TEST blog John Green Jr.')
+      //check if likes function works:
+      cy.contains('view').click()
+      cy.get('#likes')
+        .contains('0')
+      cy.get('#likesBtn').click()
+      cy.get('#likes')
+        .contains('1')
+    })
+    it('A blog can be deleted', function() {
+      cy.contains('Add Blog').click()
+        .get('#title').type('Should be deleted (TITLE)')
+        .get('#author').type('John Johnson')
+        .get('#url').type('www.webiste.com/myblog')
+      cy.contains('create').click()
+      cy.contains('view').click()
+      cy.contains('Should be deleted (TITLE)')
+      cy.get('#deleteBtn').click()
+      cy.should('not.contain', 'Title of my TEST blog')
+    })
     it('Blogs are sorted by the number of likes', function() {
       //create sample blogs:
       cy.contains('Add Blog').click()
